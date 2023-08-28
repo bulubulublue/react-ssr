@@ -1,20 +1,16 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
+const baseConfig = require('./webpack.base');
 
-module.exports = {
+const config = {
   entry: './src/client/client.js', // 也可以叫index.js
 
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
-  module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  },
+
   mode: 'development',
 };
+
+module.exports = merge(baseConfig, config);
