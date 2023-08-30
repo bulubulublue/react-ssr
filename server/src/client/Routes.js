@@ -14,12 +14,12 @@ import UsersList, { loadData } from './components/UsersList';
 export default [
   {
     path: '/',
-    element: <Home />,
+    component: <Home />,
     exact: true,
   },
   {
     loadData,
     path: '/users',
-    element: UsersList,
+    component: UsersList,
   },
 ];
