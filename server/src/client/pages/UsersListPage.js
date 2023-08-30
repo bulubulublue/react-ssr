@@ -22,10 +22,8 @@ function mapStateToProps(state) {
 
 // 用于发送请求获取数据的方法
 export function loadData(store) {
-  console.log('data loading');
   // console.log(store.dispatch(fetchUsers())); // 这个方法将返回一个promise
 
-  // return store.dispatch(fetchUsers());
   return { res: store.dispatch(fetchUsers()) };
 }
 

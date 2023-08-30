@@ -1,7 +1,6 @@
 import React from 'react';
-import Home from './components/Home';
-import UsersList, { loadData } from './components/UsersList';
-const { json } = require('react-router-dom');
+import HomePage from './pages/HomePage';
+import UsersListPage, { loadData } from './pages/UsersListPage';
 import createStore from '../helpers/createStore';
 
 export const store = createStore();
@@ -9,11 +8,11 @@ export const store = createStore();
 const routes = [
   {
     path: '/',
-    Component: Home,
+    ...HomePage,
   },
   {
     path: '/users',
-    Component: UsersList,
+    Component: UsersListPage,
     loader: () => loadData(store),
   },
 ];
