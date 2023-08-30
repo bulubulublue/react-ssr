@@ -2,6 +2,9 @@ import React from 'react';
 import Home from './components/Home';
 import UsersList, { loadData } from './components/UsersList';
 const { json } = require('react-router-dom');
+import createStore from '../helpers/createStore';
+
+export const store = createStore();
 
 const routes = [
   {
@@ -11,10 +14,7 @@ const routes = [
   {
     path: '/users',
     Component: UsersList,
-    loader() {
-      console.log('load data');
-      return json({ message: 'Welcome to React Router!' });
-    },
+    loader: () => loadData(store),
   },
 ];
 
