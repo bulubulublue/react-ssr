@@ -11,7 +11,8 @@ import 'babel-polyfill'; //当代码中使用到async时，默认需要配置run
 import routes from './Routes';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+// 第2个参数是store的初始状态
+const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk));
 let router = createBrowserRouter(routes);
 
 ReactDOM.hydrateRoot(
