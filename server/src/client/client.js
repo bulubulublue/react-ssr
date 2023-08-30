@@ -7,16 +7,16 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import 'babel-polyfill'; //当代码中使用到async时，默认需要配置runtime-generator(实际没有配置也能运行)
-import { renderRoutes } from 'react-router-config';
+
 import routes from './Routes';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const store = createStore(reducers, {}, applyMiddleware(thunk));
+let router = createBrowserRouter(routes);
 
 ReactDOM.hydrateRoot(
   document.getElementById('root'),
   <Provider store={store}>
-    <BrowserRouter>
-      <div>{renderRoutes(routes)}</div>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </Provider>
 );

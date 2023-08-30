@@ -1,25 +1,21 @@
 import React from 'react';
 import Home from './components/Home';
 import UsersList, { loadData } from './components/UsersList';
+const { json } = require('react-router-dom');
 
-// export default () => {
-//   return (
-//     <Routes>
-//       <Route exact path="/" element={<Home />} />
-//       <Route path="/users" element={<UsersList />} />
-//     </Routes>
-//   )
-// }
-
-export default [
+const routes = [
   {
     path: '/',
-    element: <Home />,
-    exact: true,
+    Component: Home,
   },
   {
-    loadData,
     path: '/users',
-    element: UsersList,
+    Component: UsersList,
+    loader() {
+      console.log('load data');
+      return json({ message: 'Welcome to React Router!' });
+    },
   },
 ];
+
+export default routes;
