@@ -1,14 +1,14 @@
 // 客户端项目入口
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import 'babel-polyfill'; //当代码中使用到async时，默认需要配置runtime-generator(实际没有配置也能运行)
-import routes from './Routes';
+import createRoutes from './Routes';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import axios from 'axios';
 
 // 创建一个客户端的axios实例
 const axiosInstance = axios.create({
@@ -22,7 +22,7 @@ const store = createStore(
   window.INITIAL_STATE,
   applyMiddleware(thunk.withExtraArgument(axiosInstance))
 );
-let router = createBrowserRouter(routes);
+let router = createBrowserRouter(createRoutes());
 
 ReactDOM.hydrateRoot(
   document.getElementById('root'),

@@ -1,11 +1,8 @@
 import React from 'react';
 import HomePage from './pages/HomePage';
 import UsersListPage, { loadData } from './pages/UsersListPage';
-import createStore from '../helpers/createStore';
 
-export const store = createStore();
-
-const routes = [
+const createRoutes = store => [
   {
     path: '/',
     ...HomePage,
@@ -17,4 +14,4 @@ const routes = [
   },
 ];
 
-export default routes;
+export default createRoutes;
