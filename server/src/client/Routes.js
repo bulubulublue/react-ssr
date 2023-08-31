@@ -1,11 +1,12 @@
 import React from 'react';
 import HomePage from './pages/HomePage';
 import UsersListPage, { loadData } from './pages/UsersListPage';
-import App from './pages/App';
+import App, { loadData as appLoadData } from './pages/App';
 
 const createRoutes = store => [
   {
     Component: App,
+    loader: () => appLoadData(store),
     children: [
       {
         path: '/',

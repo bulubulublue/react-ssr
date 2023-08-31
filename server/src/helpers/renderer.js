@@ -1,10 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import {
-  createStaticRouter,
-  StaticRouterProvider,
-} from 'react-router-dom/server';
+import { createStaticRouter, StaticRouterProvider } from 'react-router-dom/server';
 import serialize from 'serialize-javascript';
 
 // 这里的req参数就是在index.js中定义接口时，用户的请求参数
