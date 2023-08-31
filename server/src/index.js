@@ -12,9 +12,9 @@ const app = express();
 // 添加代理，表示将所有以/api开头的请求，都转发到第二个参数对应的api服务器上
 app.use(
   '/api',
-  proxy('https://react-ssr-api.herokuapp.com', {
+  proxy('http://react-ssr-api.herokuapp.com', {
     proxyReqOptDecorator(opts) {
-      opts.headers['x-forwarded-host'] = 'localhost:3002';
+      opts.headers['x-forwarded-host'] = 'localhost:3000'; // 用于配置oAuth, 需要和端口保持一致
       return opts;
     },
   })
@@ -45,6 +45,6 @@ app.get('*', async (req, res) => {
   }
 });
 
-app.listen(3002, () => {
+app.listen(3000, () => {
   console.log('listening');
 });
