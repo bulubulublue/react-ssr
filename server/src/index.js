@@ -25,16 +25,24 @@ app.use(express.static('public')); // <- 通过这样配置，会自动在bundle
 //这里使用了jsx语法，node环境无法识别，所以需要babel进行编译
 // 将路由该为*，这样用户访问所有的路由，都会到这里进行处理
 app.get('*', async (req, res) => {
-  console.log('request received');
   const store = createStore(req);
   let handler = createStaticHandler(createRoutes(store));
   let fetchRequest = createFetchRequest(req);
-  // console.log(fetchRequest);
   let context = await handler.query(fetchRequest);
 
-  context.loaderData['1'].res.then(() => {
-    res.send(renderer(req, store, handler, context));
-  });
+  if (context.loaderData && Object.keys(context.loaderData).length) {
+    const promises = [];
+    for (let key in context.loaderData) {
+      if (context.loaderData.hasOwnProperty(key)) {
+        if (context.loaderData[key] && context.loaderData[key].res instanceof Promise)
+          promises.push(context.loaderData[key].res);
+      }
+    }
+
+    Promise.all(promises).then(() => {
+      res.send(renderer(req, store, handler, context));
+    });
+  }
 });
 
 app.listen(3002, () => {
