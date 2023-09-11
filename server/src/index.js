@@ -25,7 +25,7 @@ app.use(express.static('public')); // <- 通过这样配置，会自动在bundle
 //这里使用了jsx语法，node环境无法识别，所以需要babel进行编译
 // 将路由该为*，这样用户访问所有的路由，都会到这里进行处理
 app.get('*', async (req, res) => {
-  const store = createStore(req);
+  const store = createStore(req); // 每次请求的时候都需要生成一个新的store，不然如果使用导入的store，那么所有用户用的都会是同一份store
   let handler = createStaticHandler(createRoutes(store));
   let fetchRequest = createFetchRequest(req);
   let context = await handler.query(fetchRequest);
